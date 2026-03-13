@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veloce Store | E-commerce Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="top-notice">
+      <p>🚚 Frete grátis acima de R$ 299 • 🔒 Pagamento seguro • ⚡ Ofertas relâmpago até meia-noite</p>
+    </div>
+
+    <header class="header">
+      <div class="header__main container">
+        <a class="brand" href="#">VELOCE<span>STORE</span></a>
+        <div class="search-wrap">
+          <input id="search" type="search" placeholder="Buscar produto, marca ou categoria" aria-label="Buscar" />
+          <button id="search-btn" type="button">Buscar</button>
+        </div>
+        <button id="cart-toggle" class="cart-shortcut" type="button">🛒 Carrinho <span id="cart-badge">0</span></button>
+      </div>
+      <nav class="categories container" aria-label="Categorias">
+        <a href="#">Ofertas</a>
+        <a href="#">Moda Feminina</a>
+        <a href="#">Moda Masculina</a>
+        <a href="#">Calçados</a>
+        <a href="#">Eletrônicos</a>
+        <a href="#">Casa & Decoração</a>
+        <a href="#">Acessórios</a>
+      </nav>
+    </header>
+
+    <main class="container page">
+      <section class="hero-grid">
+        <article class="hero hero--main">
+          <p class="tag">TENDÊNCIAS DA SEMANA</p>
+          <h1>Estilo premium com preço de oportunidade</h1>
+          <p>Curadoria de produtos com visual moderno para elevar seu portfólio.</p>
+          <button class="hero-cta" type="button">Comprar agora</button>
+        </article>
+        <article class="hero hero--mini">
+          <p class="tag">CUPONS</p>
+          <h2>Até R$ 120 OFF</h2>
+          <p>Use o cupom <strong>VELOCE120</strong></p>
+        </article>
+        <article class="hero hero--mini dark">
+          <p class="tag">PRIME</p>
+          <h2>Frete turbo em 24h</h2>
+          <p>Selecione produtos com selo entrega expressa.</p>
+        </article>
+      </section>
+
+      <section class="section-head">
+        <h2>Produtos em destaque</h2>
+        <p id="result-count">Exibindo 8 produtos</p>
+      </section>
+
+      <section id="products" class="products-grid" aria-live="polite"></section>
+    </main>
+
+    <aside id="cart-panel" class="cart-panel" aria-label="Carrinho de compras">
+      <div class="cart-panel__header">
+        <h3>Seu carrinho</h3>
+        <button id="cart-close" type="button">✕</button>
+      </div>
+
+      <ul id="cart-items" class="cart-items"></ul>
+
+      <div class="cart-block">
+        <label for="cep">Calcular frete</label>
+        <div class="inline-input">
+          <input id="cep" type="text" maxlength="9" placeholder="00000-000" />
+          <button id="calc-shipping" type="button">Calcular</button>
+        </div>
+        <p id="shipping-info" class="muted">Informe seu CEP para ver o frete.</p>
+      </div>
+
+      <div class="cart-block">
+        <label for="payment-method">Forma de pagamento</label>
+        <select id="payment-method">
+          <option value="pix">PIX (5% OFF)</option>
+          <option value="card">Cartão de crédito (até 6x)</option>
+          <option value="boleto">Boleto bancário</option>
+        </select>
+        <p id="payment-info" class="muted">PIX aplica desconto automático no total.</p>
+      </div>
+
+      <div class="totals">
+        <p><span>Subtotal</span> <strong id="subtotal">R$ 0,00</strong></p>
+        <p><span>Frete</span> <strong id="shipping-total">R$ 0,00</strong></p>
+        <p><span>Ajuste pagamento</span> <strong id="payment-adjust">R$ 0,00</strong></p>
+        <p class="grand"><span>Total</span> <strong id="grand-total">R$ 0,00</strong></p>
+      </div>
+
+      <button id="checkout" class="checkout-btn" type="button">Finalizar pedido</button>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
