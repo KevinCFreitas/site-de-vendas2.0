@@ -1,12 +1,12 @@
 const products = [
-  { id: 1, name: 'Jaqueta Urban Prime', category: 'Moda', price: 229.9, oldPrice: 349.9, rating: 4.8, color: '#1f2937', emoji: '🧥' },
-  { id: 2, name: 'Tênis Veloce Run', category: 'Calçados', price: 319.9, oldPrice: 429.9, rating: 4.9, color: '#0f766e', emoji: '👟' },
-  { id: 3, name: 'Smartwatch Vision X', category: 'Eletrônicos', price: 559.9, oldPrice: 699.9, rating: 4.7, color: '#374151', emoji: '⌚' },
-  { id: 4, name: 'Bolsa Minimal Lux', category: 'Acessórios', price: 199.9, oldPrice: 279.9, rating: 4.6, color: '#7c2d12', emoji: '👜' },
-  { id: 5, name: 'Fone Bluetooth Pro', category: 'Eletrônicos', price: 289.9, oldPrice: 389.9, rating: 4.8, color: '#312e81', emoji: '🎧' },
-  { id: 6, name: 'Kit Home Office', category: 'Casa', price: 179.9, oldPrice: 249.9, rating: 4.5, color: '#1e3a8a', emoji: '💼' },
-  { id: 7, name: 'Vestido Soft Glow', category: 'Moda', price: 149.9, oldPrice: 219.9, rating: 4.7, color: '#9f1239', emoji: '👗' },
-  { id: 8, name: 'Óculos Solar Pulse', category: 'Acessórios', price: 129.9, oldPrice: 189.9, rating: 4.4, color: '#78350f', emoji: '🕶️' }
+  { id: 1, name: 'Smartwatch Elite', category: 'Wearables', price: 199.99, oldPrice: 249.99, rating: 4.8, color: '#1f2937', emoji: '⌚' },
+  { id: 2, name: 'Wireless Headphones', category: 'Audio', price: 129.99, oldPrice: 179.99, rating: 4.9, color: '#374151', emoji: '🎧' },
+  { id: 3, name: 'Sneakers Urban', category: 'Calçados', price: 89.99, oldPrice: 112, rating: 4.6, color: '#4b5563', emoji: '👟' },
+  { id: 4, name: 'Leather Bag', category: 'Acessórios', price: 149.99, oldPrice: 199.99, rating: 4.7, color: '#78350f', emoji: '👜' },
+  { id: 5, name: '4K Smart TV', category: 'Eletrônicos', price: 499.99, oldPrice: 649.99, rating: 4.8, color: '#1e3a8a', emoji: '📺' },
+  { id: 6, name: 'Gaming Console', category: 'Games', price: 349.99, oldPrice: 429.99, rating: 4.7, color: '#111827', emoji: '🎮' },
+  { id: 7, name: 'Fashion Watch', category: 'Moda', price: 79.99, oldPrice: 129.99, rating: 4.5, color: '#6b7280', emoji: '⌚' },
+  { id: 8, name: 'Wireless Speaker', category: 'Audio', price: 59.99, oldPrice: 89.99, rating: 4.6, color: '#334155', emoji: '🔊' }
 ];
 
 const state = {
@@ -18,6 +18,7 @@ const state = {
 };
 
 const productsEl = document.getElementById('products');
+const bestProductsEl = document.getElementById('best-products');
 const resultCountEl = document.getElementById('result-count');
 const cartItemsEl = document.getElementById('cart-items');
 const subtotalEl = document.getElementById('subtotal');
@@ -65,22 +66,10 @@ function updateTotals() {
   cartBadgeEl.textContent = state.cart.reduce((sum, item) => sum + item.qty, 0);
 }
 
-function renderProducts() {
-  productsEl.innerHTML = '';
-
-  if (!state.filteredProducts.length) {
-    productsEl.innerHTML = '<p class="empty">Nenhum produto encontrado para essa busca.</p>';
-    resultCountEl.textContent = 'Exibindo 0 produtos';
-    return;
-  }
-
-  resultCountEl.textContent = `Exibindo ${state.filteredProducts.length} produtos`;
-
-  state.filteredProducts.forEach((product) => {
-    const item = document.createElement('article');
-    item.className = 'product';
-    item.innerHTML = `
-      <div class="product__media" style="background: linear-gradient(135deg, ${product.color}, #ff6d2f);">${product.emoji}</div>
+function productCard(product) {
+  return `
+    <article class="product">
+      <div class="product__media" style="background: linear-gradient(135deg, ${product.color}, #8e99ad);">${product.emoji}</div>
       <div class="product__body">
         <h3>${product.name}</h3>
         <p class="meta">${product.category} • ⭐ ${product.rating}</p>
@@ -88,12 +77,22 @@ function renderProducts() {
           <span class="old-price">${formatBRL(product.oldPrice)}</span>
           <span class="current-price">${formatBRL(product.price)}</span>
         </div>
-        <button type="button" data-add="${product.id}">Adicionar ao carrinho</button>
+        <button type="button" data-add="${product.id}">Add to Cart</button>
       </div>
-    `;
+    </article>
+  `;
+}
 
-    productsEl.appendChild(item);
-  });
+function renderProducts() {
+  if (!state.filteredProducts.length) {
+    productsEl.innerHTML = '<p class="empty">Nenhum produto encontrado para essa busca.</p>';
+    resultCountEl.textContent = 'Exibindo 0 produtos';
+    return;
+  }
+
+  resultCountEl.textContent = `Exibindo ${state.filteredProducts.length} produtos`;
+  productsEl.innerHTML = state.filteredProducts.slice(0, 4).map(productCard).join('');
+  bestProductsEl.innerHTML = state.filteredProducts.slice(4).map(productCard).join('');
 }
 
 function renderCart() {
@@ -124,7 +123,6 @@ function renderCart() {
         <button type="button" data-remove="${item.id}">Remover</button>
       </div>
     `;
-
     cartItemsEl.appendChild(li);
   });
 
@@ -169,7 +167,7 @@ function calculateShipping() {
     const region = Number(cep[0]);
     const base = region <= 3 ? 18.9 : region <= 6 ? 24.9 : 31.9;
     state.shipping = base;
-    state.shippingLabel = `Frete calculado para CEP ${cep.slice(0, 5)}-${cep.slice(5)}: ${formatBRL(base)} (3 a 7 dias úteis).`;
+    state.shippingLabel = `Frete para CEP ${cep.slice(0, 5)}-${cep.slice(5)}: ${formatBRL(base)} (3 a 7 dias úteis).`;
   }
 
   shippingInfoEl.textContent = state.shippingLabel;
@@ -179,7 +177,7 @@ function calculateShipping() {
 function updatePaymentInfo() {
   const methodMap = {
     pix: 'PIX selecionado: desconto de 5% aplicado no total.',
-    card: 'Cartão selecionado: taxa de processamento de 3% (até 6x sem juros visuais).',
+    card: 'Cartão selecionado: taxa de processamento de 3%.',
     boleto: 'Boleto selecionado: sem desconto e sem taxa adicional.'
   };
 
@@ -244,12 +242,7 @@ document.getElementById('checkout').addEventListener('click', () => {
   }
 
   const total = formatBRL(getGrandTotal());
-  const paymentLabels = {
-    pix: 'PIX',
-    card: 'Cartão de crédito',
-    boleto: 'Boleto'
-  };
-
+  const paymentLabels = { pix: 'PIX', card: 'Cartão de crédito', boleto: 'Boleto' };
   alert(`Pedido confirmado!\nPagamento: ${paymentLabels[state.paymentMethod]}\nTotal final: ${total}\nEntrega estimada: 3 a 7 dias úteis.`);
 
   state.cart = [];
@@ -263,9 +256,7 @@ document.getElementById('checkout').addEventListener('click', () => {
 searchEl.addEventListener('input', (event) => {
   const term = event.target.value.toLowerCase().trim();
   state.filteredProducts = products.filter(
-    (product) =>
-      product.name.toLowerCase().includes(term) ||
-      product.category.toLowerCase().includes(term)
+    (product) => product.name.toLowerCase().includes(term) || product.category.toLowerCase().includes(term)
   );
   renderProducts();
 });

@@ -3,61 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Veloce Store | E-commerce Demo</title>
+    <title>Veloce Store | Premium Ecommerce</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="top-notice">
-      <p>🚚 Frete grátis acima de R$ 299 • 🔒 Pagamento seguro • ⚡ Ofertas relâmpago até meia-noite</p>
+    <div class="promo-bar">
+      <p>Frete grátis acima de R$ 299 • Devolução em 7 dias • Cupom de boas-vindas: <strong>BEMVINDO15</strong></p>
     </div>
 
-    <header class="header">
-      <div class="header__main container">
-        <a class="brand" href="#">VELOCE<span>STORE</span></a>
-        <div class="search-wrap">
-          <input id="search" type="search" placeholder="Buscar produto, marca ou categoria" aria-label="Buscar" />
-          <button id="search-btn" type="button">Buscar</button>
+    <header class="top-nav">
+      <div class="container nav-content">
+        <a href="#" class="logo">Veloce<span>Store</span></a>
+
+        <nav class="menu" aria-label="Navegação principal">
+          <a href="#">Home</a>
+          <a href="#featured">Shop</a>
+          <a href="#bestsellers">Deals</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="ghost-btn" type="button">Login</button>
+          <button class="ghost-btn" type="button">Wishlist</button>
+          <button id="cart-toggle" class="cart-btn" type="button">Carrinho <span id="cart-badge">0</span></button>
         </div>
-        <button id="cart-toggle" class="cart-shortcut" type="button">🛒 Carrinho <span id="cart-badge">0</span></button>
       </div>
-      <nav class="categories container" aria-label="Categorias">
-        <a href="#">Ofertas</a>
-        <a href="#">Moda Feminina</a>
-        <a href="#">Moda Masculina</a>
-        <a href="#">Calçados</a>
-        <a href="#">Eletrônicos</a>
-        <a href="#">Casa & Decoração</a>
-        <a href="#">Acessórios</a>
-      </nav>
     </header>
 
     <main class="container page">
-      <section class="hero-grid">
-        <article class="hero hero--main">
-          <p class="tag">TENDÊNCIAS DA SEMANA</p>
-          <h1>Estilo premium com preço de oportunidade</h1>
-          <p>Curadoria de produtos com visual moderno para elevar seu portfólio.</p>
-          <button class="hero-cta" type="button">Comprar agora</button>
-        </article>
-        <article class="hero hero--mini">
-          <p class="tag">CUPONS</p>
-          <h2>Até R$ 120 OFF</h2>
-          <p>Use o cupom <strong>VELOCE120</strong></p>
-        </article>
-        <article class="hero hero--mini dark">
-          <p class="tag">PRIME</p>
-          <h2>Frete turbo em 24h</h2>
-          <p>Selecione produtos com selo entrega expressa.</p>
-        </article>
+      <section class="hero">
+        <div class="hero-overlay">
+          <p class="tag">NEW ARRIVALS</p>
+          <h1>New Arrivals</h1>
+          <p>Discover the latest trends com visual premium para seu portfólio.</p>
+          <button class="primary-btn" type="button">Shop Now</button>
+        </div>
       </section>
 
-      <section class="section-head">
-        <h2>Produtos em destaque</h2>
+      <section class="search-row">
+        <div class="search-box">
+          <input id="search" type="search" placeholder="Buscar produto ou categoria" aria-label="Buscar produto" />
+          <button id="search-btn" type="button">Buscar</button>
+        </div>
         <p id="result-count">Exibindo 8 produtos</p>
       </section>
 
-      <section id="products" class="products-grid" aria-live="polite"></section>
+      <section id="featured" class="products-section">
+        <div class="section-header">
+          <h2>Featured Products</h2>
+          <button class="view-all" type="button">View all</button>
+        </div>
+        <div id="products" class="products-grid"></div>
+      </section>
+
+      <section id="bestsellers" class="products-section">
+        <div class="section-header">
+          <h2>Best Sellers</h2>
+        </div>
+        <div id="best-products" class="products-grid"></div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Customer Service</h4>
+          <a href="#">FAQ</a>
+          <a href="#">Shipping & Returns</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Receba ofertas semanais no e-mail.</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Seu melhor e-mail" />
+            <button type="button">Assinar</button>
+          </div>
+        </div>
+      </div>
+      <p class="copyright">© 2026 Veloce Store. All rights reserved.</p>
+    </footer>
 
     <aside id="cart-panel" class="cart-panel" aria-label="Carrinho de compras">
       <div class="cart-panel__header">
