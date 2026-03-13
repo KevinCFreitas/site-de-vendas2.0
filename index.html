@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Site de Vendas 2.0</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__content">
+        <div>
+          <p class="eyebrow">Loja online</p>
+          <h1>Site de Vendas 2.0</h1>
+          <p class="subtitle">Visual profissional para portfólio, com catálogo, busca e carrinho.</p>
+        </div>
+        <div class="stats-card" aria-label="Resumo da loja">
+          <strong>+1.200</strong>
+          <span>Pedidos finalizados</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="controls card-surface">
+        <label for="search">Buscar produto</label>
+        <input id="search" type="search" placeholder="Ex.: Tênis" aria-label="Buscar produto" />
+      </section>
+
+      <section>
+        <div class="section-header">
+          <h2>Produtos em destaque</h2>
+        </div>
+        <div id="products" class="grid"></div>
+      </section>
+
+      <aside class="cart" aria-label="Carrinho de compras">
+        <div class="cart__header">
+          <h2>Carrinho</h2>
+          <span id="cart-count" class="pill">0 itens</span>
+        </div>
+        <ul id="cart-items"></ul>
+        <p id="cart-total">Total: R$ 0,00</p>
+        <button id="checkout">Finalizar compra</button>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
