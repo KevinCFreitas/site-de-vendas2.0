@@ -3,47 +3,132 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Site de Vendas 2.0</title>
+    <title>Veloce Store | Premium Ecommerce</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <div class="topbar__content">
-        <div>
-          <p class="eyebrow">Loja online</p>
-          <h1>Site de Vendas 2.0</h1>
-          <p class="subtitle">Visual profissional para portfólio, com catálogo, busca e carrinho.</p>
-        </div>
-        <div class="stats-card" aria-label="Resumo da loja">
-          <strong>+1.200</strong>
-          <span>Pedidos finalizados</span>
+    <div class="promo-bar">
+      <p>Frete grátis acima de R$ 299 • Devolução em 7 dias • Cupom de boas-vindas: <strong>BEMVINDO15</strong></p>
+    </div>
+
+    <header class="top-nav">
+      <div class="container nav-content">
+        <a href="#" class="logo">Veloce<span>Store</span></a>
+
+        <nav class="menu" aria-label="Navegação principal">
+          <a href="#">Home</a>
+          <a href="#featured">Shop</a>
+          <a href="#bestsellers">Deals</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="ghost-btn" type="button">Login</button>
+          <button class="ghost-btn" type="button">Wishlist</button>
+          <button id="cart-toggle" class="cart-btn" type="button">Carrinho <span id="cart-badge">0</span></button>
         </div>
       </div>
     </header>
 
-    <main class="container">
-      <section class="controls card-surface">
-        <label for="search">Buscar produto</label>
-        <input id="search" type="search" placeholder="Ex.: Tênis" aria-label="Buscar produto" />
+    <main class="container page">
+      <section class="hero">
+        <div class="hero-overlay">
+          <p class="tag">NEW ARRIVALS</p>
+          <h1>New Arrivals</h1>
+          <p>Discover the latest trends com visual premium para seu portfólio.</p>
+          <button class="primary-btn" type="button">Shop Now</button>
+        </div>
       </section>
 
-      <section>
+      <section class="search-row">
+        <div class="search-box">
+          <input id="search" type="search" placeholder="Buscar produto ou categoria" aria-label="Buscar produto" />
+          <button id="search-btn" type="button">Buscar</button>
+        </div>
+        <p id="result-count">Exibindo 8 produtos</p>
+      </section>
+
+      <section id="featured" class="products-section">
         <div class="section-header">
-          <h2>Produtos em destaque</h2>
+          <h2>Featured Products</h2>
+          <button class="view-all" type="button">View all</button>
         </div>
-        <div id="products" class="grid"></div>
+        <div id="products" class="products-grid"></div>
       </section>
 
-      <aside class="cart" aria-label="Carrinho de compras">
-        <div class="cart__header">
-          <h2>Carrinho</h2>
-          <span id="cart-count" class="pill">0 itens</span>
+      <section id="bestsellers" class="products-section">
+        <div class="section-header">
+          <h2>Best Sellers</h2>
         </div>
-        <ul id="cart-items"></ul>
-        <p id="cart-total">Total: R$ 0,00</p>
-        <button id="checkout">Finalizar compra</button>
-      </aside>
+        <div id="best-products" class="products-grid"></div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Customer Service</h4>
+          <a href="#">FAQ</a>
+          <a href="#">Shipping & Returns</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p>Receba ofertas semanais no e-mail.</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Seu melhor e-mail" />
+            <button type="button">Assinar</button>
+          </div>
+        </div>
+      </div>
+      <p class="copyright">© 2026 Veloce Store. All rights reserved.</p>
+    </footer>
+
+    <aside id="cart-panel" class="cart-panel" aria-label="Carrinho de compras">
+      <div class="cart-panel__header">
+        <h3>Seu carrinho</h3>
+        <button id="cart-close" type="button">✕</button>
+      </div>
+
+      <ul id="cart-items" class="cart-items"></ul>
+
+      <div class="cart-block">
+        <label for="cep">Calcular frete</label>
+        <div class="inline-input">
+          <input id="cep" type="text" maxlength="9" placeholder="00000-000" />
+          <button id="calc-shipping" type="button">Calcular</button>
+        </div>
+        <p id="shipping-info" class="muted">Informe seu CEP para ver o frete.</p>
+      </div>
+
+      <div class="cart-block">
+        <label for="payment-method">Forma de pagamento</label>
+        <select id="payment-method">
+          <option value="pix">PIX (5% OFF)</option>
+          <option value="card">Cartão de crédito (até 6x)</option>
+          <option value="boleto">Boleto bancário</option>
+        </select>
+        <p id="payment-info" class="muted">PIX aplica desconto automático no total.</p>
+      </div>
+
+      <div class="totals">
+        <p><span>Subtotal</span> <strong id="subtotal">R$ 0,00</strong></p>
+        <p><span>Frete</span> <strong id="shipping-total">R$ 0,00</strong></p>
+        <p><span>Ajuste pagamento</span> <strong id="payment-adjust">R$ 0,00</strong></p>
+        <p class="grand"><span>Total</span> <strong id="grand-total">R$ 0,00</strong></p>
+      </div>
+
+      <button id="checkout" class="checkout-btn" type="button">Finalizar pedido</button>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
 
     <script src="script.js"></script>
   </body>
